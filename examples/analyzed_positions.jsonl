@@ -1,0 +1,1 @@
+{"game_id":"demo-001","title":"終盤の踏み込み","source":"サンプル棋譜・第1局","move_number":93,"side_to_move":"black","sfen":"4k4/9/3g1g3/2p1p1p2/3p1p3/2P1P1P2/3G1G3/4R4/4K4 b S2P 93","evaluation_before":420,"evaluation_after":-680,"played_move":"5b5a+","played_notation":"▲5二飛成","best_move":"S*5c","best_notation":"▲5三銀","explanation":"すぐに飛車を成ると受けに回られて攻めが切れます。5三銀なら玉の逃げ道を狭めながら金に当たり、攻めが続きます。"}

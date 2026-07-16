@@ -1,0 +1,16 @@
+{
+  "expo": {
+    "name": "勝負手クイズ",
+    "slug": "shogi-quiz",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "app.shogiquiz.mobile"
+    },
+    "android": {
+      "package": "app.shogiquiz.mobile"
+    }
+  }
+}
