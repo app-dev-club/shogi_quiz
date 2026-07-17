@@ -99,6 +99,7 @@ git push -u origin <ブランチ名>
 | `npm run typecheck` | TypeScript検査 |
 | `npx expo-doctor` | Expo依存関係と設定の診断 |
 | `python3 scripts/build_quizzes.py ...` | 解析済み局面から問題を生成 |
+| `python3 scripts/analyze_games.py ...` | KIF/CSAをUSIエンジンで解析 |
 
 ## トラブルシューティング
 

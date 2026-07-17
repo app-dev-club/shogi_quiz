@@ -26,7 +26,23 @@ npm run start
 
 ## 棋譜データをクイズにする
 
-アプリ用データ生成は、棋譜解析とクイズ抽出を分離しています。まず、やねうら王などのUSIエンジンで各着手前後を解析し、1局面1行のJSONLを作ります。`evaluation_before` と `evaluation_after` は、どちらも「実戦手を指した側がプラス」になるように正規化してください。
+KIF/CSA棋譜と、やねうら王などのUSIエンジンを用意します。Python側の依存関係を導入し、棋譜を解析してからクイズデータを生成します。
+
+```bash
+python3 -m pip install -r requirements-analysis.txt
+python3 scripts/analyze_games.py game.kif \
+  --engine /path/to/YaneuraOu-by-gcc \
+  --output analyzed.jsonl \
+  --nodes 100000 \
+  --engine-option Threads=4 \
+  --engine-option USI_Hash=256
+python3 scripts/build_quizzes.py analyzed.jsonl --threshold 500 --limit 100
+npm run typecheck
+```
+
+`--nodes` の代わりに `--movetime 1000`（ミリ秒）も指定できます。解析の再現性を重視する場合は、同じエンジン・評価関数・ノード数・オプションを使ってください。長い棋譜の試運転には `--start-move` と `--end-move` が使えます。
+
+解析スクリプトは各着手の前後を評価し、`evaluation_before` と `evaluation_after` をどちらも「実戦手を指した側がプラス」になるよう正規化します。出力は1局面1行のJSONLです。
 
 必要なフィールドは次のとおりです。
 

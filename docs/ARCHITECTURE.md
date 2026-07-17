@@ -15,10 +15,13 @@
 - 回答判定、解説、進捗、最終スコアを表示
 - エンジン解析済みJSONLから、指定した評価値悪化幅以上の問題を生成
 
+実装済みの解析パイプライン:
+
+- `scripts/analyze_games.py` によるKIF / CSAファイルの読み込み
+- USIエンジンを使った着手前後の自動解析と視点の正規化
+
 未実装:
 
-- KIF / CSAファイルの直接読み込み
-- USIエンジンの起動と自動解析
 - エンジンPVからの自動解説生成
 - 問題のAPI配信、端末保存、学習履歴
 - ユーザー認証、同期、問題のお気に入り
@@ -28,7 +31,7 @@
 
 ```text
 KIF / CSA棋譜
-    ↓ 未実装: 棋譜パーサー + USIエンジン解析
+    ↓ scripts/analyze_games.py + USIエンジン
 解析済み局面 JSONL
     ↓ scripts/build_quizzes.py
 src/data/quizzes.ts
@@ -48,6 +51,7 @@ src/data/quizzes.ts
 | `src/types.ts` | Quiz、MoveChoiceなどの型 |
 | `src/data/quizzes.ts` | アプリへ同梱する問題データ |
 | `scripts/build_quizzes.py` | JSONLの絞り込みとTypeScript生成 |
+| `scripts/analyze_games.py` | KIF/CSAをUSIエンジンで解析してJSONLを生成 |
 | `examples/analyzed_positions.jsonl` | 解析済み入力の最小例 |
 
 ## クイズデータ契約
@@ -81,12 +85,9 @@ src/data/quizzes.ts
 
 ## 次に実装する推奨順序
 
-1. KIF / CSAを読み、各着手前のSFENと実戦手を列挙する。
-2. やねうら王などのUSIエンジンアダプターを作る。
-3. 一定ノード数で着手前の最善手・評価値と、実戦手後の評価値を取得する。
-4. 視点を正規化し、現在のJSONL契約で出力する。
-5. 小さな棋譜セットで評価値、手数、合法手を自動テストする。
-6. 問題画面に駒台と候補手ハイライトを追加する。
+1. 小さな棋譜セットと実エンジンで評価値、手数、合法手を統合テストする。
+2. エンジンPVを保存し、自動解説生成へ利用する。
+3. 問題画面に駒台と候補手ハイライトを追加する。
 
 ## 更新時の注意
 
